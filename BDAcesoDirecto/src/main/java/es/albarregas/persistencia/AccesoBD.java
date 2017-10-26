@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -62,7 +63,7 @@ public class AccesoBD extends HttpServlet {
         ResultSet resultado = null;
 
         Ave ave = null;
-        List<Ave> aves = null;
+        ArrayList<Ave> aves=new ArrayList<Ave>();
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -93,11 +94,33 @@ public class AccesoBD extends HttpServlet {
                         ave.setFecha(resultado.getString(4));
                         request.setAttribute("una", ave);
                         url = "unRegistro.jsp";
+                        resultado.close();
+                        preparada.close();
+                        conexion.close();
                     } catch (SQLException e) {
 //                        request.setAttribute("anilla", anilla);
                         url = "error.jsp";
                     }
 
+                }
+            }
+            if(request.getParameter("todas")!=null){
+                sql = "select * from aves";
+                preparada = conexion.prepareStatement(sql);
+                try{
+                    resultado=preparada.executeQuery();
+                    while(resultado.next()){
+                        ave = new Ave();
+                        ave.setAnilla(resultado.getString(1));
+                        ave.setEspecie(resultado.getString(2));
+                        ave.setLugar(resultado.getString(3));
+                        ave.setFecha(resultado.getString(4));
+                        aves.add(ave);
+                    }
+                    request.setAttribute("aves", aves);
+                    url = "varios.jsp";
+                }catch (SQLException e) {
+                    
                 }
             }
             request.getRequestDispatcher(url).forward(request, response);

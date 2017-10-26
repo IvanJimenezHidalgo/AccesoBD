@@ -49,5 +49,12 @@ public class Ave implements Serializable{
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    @Override
+    public String toString() {
+        return "Ave{" + "anilla=" + anilla + ", especie=" + especie + ", lugar=" + lugar + ", fecha=" + fecha + '}';
+    }
+    
+    
     
 }
