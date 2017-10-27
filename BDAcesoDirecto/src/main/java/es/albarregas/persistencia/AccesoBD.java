@@ -120,7 +120,31 @@ public class AccesoBD extends HttpServlet {
                     request.setAttribute("aves", aves);
                     url = "varios.jsp";
                 }catch (SQLException e) {
-                    
+                    System.out.println("Error");
+                    System.out.println(e);
+                }
+            }
+            if(request.getParameter("algunas")!=null){
+                sql = "select * from aves";
+                preparada = conexion.prepareStatement(sql);
+                try{
+                    resultado=preparada.executeQuery();
+                    int ale=(int)(Math.random()*6+1);
+                    int c=0;
+                    while(resultado.next() && c<ale){
+                        ave = new Ave();
+                        ave.setAnilla(resultado.getString(1));
+                        ave.setEspecie(resultado.getString(2));
+                        ave.setLugar(resultado.getString(3));
+                        ave.setFecha(resultado.getString(4));
+                        aves.add(ave);
+                        c++;
+                    }
+                    request.setAttribute("aves", aves);
+                    url = "varios.jsp";
+                }catch (SQLException e) {
+                    System.out.println("Error");
+                    System.out.println(e);
                 }
             }
             request.getRequestDispatcher(url).forward(request, response);
