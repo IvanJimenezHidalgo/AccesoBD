@@ -4,7 +4,7 @@
     Author     : Ivan
 --%>
 
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="es.albarregas.beans.Ave"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
     </head>
     <body>
         <h1>Listado de aves</h1>
-        <%List<Ave> aves=(List)request.getAttribute("aves");
+        <%ArrayList<Ave> aves=(ArrayList)request.getAttribute("aves");
             for(Ave a:aves){
                 %>
                 <p><%=a.toString()%></p>

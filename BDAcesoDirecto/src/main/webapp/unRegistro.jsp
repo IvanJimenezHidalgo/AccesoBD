@@ -15,13 +15,7 @@
     <body>
         <h1>Datos del ave</h1>
         
-        <ul>
-            <%Ave ave=(Ave)request.getAttribute("una");%>
-            <li>Anilla: <%=ave.getAnilla()%></li>
-            <li>Especie: <%=ave.getEspecie()%></li>
-            <li>Lugar: <%=ave.getLugar()%></li>
-            <li>Fecha: <%=ave.getFecha()%></li>
-        </ul>
+        <p><%=request.getAttribute("una").toString()%> </p>
         
         <a href="index.html">Volver</a>
         

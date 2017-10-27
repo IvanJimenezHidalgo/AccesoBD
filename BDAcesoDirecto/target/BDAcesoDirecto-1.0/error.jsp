@@ -12,7 +12,7 @@
         <title>Error</title>
     </head>
     <body>
-        <h2>La anilla <%=request.getParameter("una") %> no existe en la base de datos</h2>
+        <h2><%=request.getAttribute("error")%> </h2>
         <br>
         <a href="index.html">Volver</a>
     </body>
